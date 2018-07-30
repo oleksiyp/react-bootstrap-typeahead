@@ -4,8 +4,25 @@ import onClickOutside from 'react-onclickoutside';
 import React from 'react';
 
 import highlightOnlyResultContainer from './highlightOnlyResultContainer';
-import {caseSensitiveType, checkPropType, defaultInputValueType, highlightOnlyResultType, ignoreDiacriticsType, inputPropsType, labelKeyType, optionType} from '../propTypes/';
-import {addCustomOption, defaultFilterBy, getDisplayName, getOptionLabel, getStringLabelKey, getTruncatedOptions, pluralize} from '../utils/';
+import {
+    caseSensitiveType,
+    checkPropType,
+    defaultInputValueType,
+    highlightOnlyResultType,
+    ignoreDiacriticsType,
+    inputPropsType,
+    labelKeyType,
+    optionType
+} from '../propTypes/';
+import {
+    addCustomOption,
+    defaultFilterBy,
+    getDisplayName,
+    getOptionLabel,
+    getStringLabelKey,
+    getTruncatedOptions,
+    pluralize
+} from '../utils/';
 
 import {DEFAULT_LABELKEY} from '../constants/defaultLabelKey';
 import {DOWN, ESC, RETURN, RIGHT, TAB, UP} from '../constants/keyCode';
@@ -370,7 +387,10 @@ function typeaheadContainer(Typeahead) {
       this.setState({
         initialItem: selection,
         text,
-      });
+      }, () => this._handleInputChange({
+          target: {value: text},
+          persist: () => {}
+      }));
 
       // Text must be updated before the selection to fix #211.
       // TODO: Find a more robust way of solving the issue.
